@@ -4,6 +4,9 @@ var _ = require('lodash');
 var logger = require('../lib/logger');
 var log = logger();
 
+const jsonschema = require('jsonschema');
+const userSchema = require('../schemas/userSchema.json');
+
 var users = require('../init_data.json').data;
 var curId = _.size(users);
 
@@ -13,9 +16,14 @@ router.get('/', function(req, res) {
 });
 
 /* Create a new user */
-router.post('/', function(req, res) {
+router.post('/', function(req, res, next) {
   var user = req.body;
-  user.id = curId++;
+  const result = jsonschema.validate(user, userSchema);
+  if (!result.valid){
+    return next(result.errors.map(errorObject => errorObject.message));
+  }
+  var user = req.body;
+  user.id = ++curId;
   if (!user.state) {
     user.state = 'pending';
   }

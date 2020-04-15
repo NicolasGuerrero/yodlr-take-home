@@ -2,9 +2,31 @@
 <html>
 <head>
   <meta charset=utf-8>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+  <script src="https://unpkg.com/jquery"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="./js/admin.js"></script>
   <title>Yodlr Admin Page</title>
 </head>
 <body>
-  List user data here
+  <table class="table" id="user-data">
+    <tr>
+      <th scope="col">
+        ID
+      </th>
+      <th scope="col">
+        Email
+      </th>
+      <th scope="col">
+        First Name
+      </th>
+      <th scope="col">
+        Last Name
+      </th>
+      <th scope="col">
+        State
+      </th>
+    </tr>
+  </table>
 </body>
 </html>
